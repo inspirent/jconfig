@@ -5,7 +5,7 @@ import (
 )
 
 func TestConfigFromString(t *testing.T) {
-	c := LoadConfigString(`{"one":1,"two":"zwei","three":["a","b","c"]}`)
+	c := LoadConfigString(`{"one":1,"two":"zwei","three":["a","b","c"],"four":{"a", "b", "c", "d"}}`)
 	if c == nil {
 		t.Fatalf("expected a config object")
 	}
@@ -20,6 +20,9 @@ func TestConfigFromString(t *testing.T) {
 	}
 	if len(c.GetArray("three")) != 3 {
 		t.Errorf("expected 3 elt array")
+	}
+	if len(c.GetMap("four") != 4) {
+		t.Errorf("expected 4 in map, ", c.GetMap("four"))
 	}
 }
 
